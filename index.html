@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visitor Counter</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <span class="title">Je bent bezoeker nummer</span>
+      <span id="counter"></span>
+    </div>
+
+    <script>
+      const counter = document.getElementById("counter");
+      const wrapper = document.querySelector(".wrapper");
+
+      const getCounter = async () => {
+        const res = await fetch("http://localhost:3000/counter");
+        if (res.status == 200) {
+          const json = await res.json();
+          counter.innerText = json.res;
+        } else {
+          counter.innerText = 0;
+        }
+        wrapper.style.opacity = 100;
+      };
+
+      getCounter();
+    </script>
+  </body>
+</html>
